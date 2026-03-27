@@ -17,31 +17,6 @@ export default function Footer() {
               La forma más rápida de alquilar maquinaria de obra en España.
             </p>
             
-            <div className="mt-8">
-              <p className="text-xs font-bold text-white uppercase tracking-wider mb-3">Únete al lanzamiento</p>
-              <form 
-                name="general-waitlist"
-                method="POST"
-                data-netlify="true"
-                data-netlify-honeypot="bot-field"
-                className="flex gap-2"
-              >
-                <input type="hidden" name="form-name" value="general-waitlist" />
-                <input 
-                  type="email" 
-                  name="email"
-                  placeholder="Tu email" 
-                  required
-                  className="bg-white/10 border-none rounded-lg px-3 py-2 text-sm text-white placeholder:text-white/30 focus:ring-1 focus:ring-primary w-full"
-                />
-                <button 
-                  type="submit"
-                  className="bg-primary hover:bg-primary-hover text-white px-3 py-2 rounded-lg text-sm font-bold transition-colors flex-shrink-0"
-                >
-                  Ok
-                </button>
-              </form>
-            </div>
 
             <div className="flex gap-3 mt-6">
               <a href="#" className="w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors" aria-label="LinkedIn">
