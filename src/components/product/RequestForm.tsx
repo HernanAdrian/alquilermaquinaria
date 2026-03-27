@@ -40,8 +40,21 @@ export default function RequestForm({ equipmentName, cityName, minPrice, isWaitl
         <form
           name="contact"
           method="POST"
-          data-netlify="true"
-          action="/success"
+          action="/__forms.html"
+          onSubmit={async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.currentTarget);
+            try {
+              await fetch("/__forms.html", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: new URLSearchParams(formData as any).toString(),
+              });
+              window.location.href = "/success";
+            } catch (error) {
+              alert("Error al enviar el formulario");
+            }
+          }}
           className="space-y-5"
         >
           <input type="hidden" name="form-name" value="contact" />
