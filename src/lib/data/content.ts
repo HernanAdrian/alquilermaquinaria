@@ -1,3 +1,5 @@
+import { CITIES } from './cities';
+
 export const HOW_IT_WORKS_STEPS = [
   {
     number: '01',
@@ -76,6 +78,17 @@ export const FAQ_DATA: Record<string, Record<string, FAQItem[]>> = {
   },
 };
 
+Object.keys(FAQ_DATA).forEach(equipSlug => {
+  CITIES.forEach(city => {
+    if (city.status === 'active' && !FAQ_DATA[equipSlug][city.slug]) {
+      FAQ_DATA[equipSlug][city.slug] = FAQ_DATA[equipSlug].malaga.map(q => ({
+        question: q.question.replace(/Málaga/g, city.name),
+        answer: q.answer.replace(/Málaga/g, city.name)
+      }));
+    }
+  });
+});
+
 export interface UseCaseSection {
   title: string;
   body: string;
@@ -100,11 +113,30 @@ export const USE_CASES: Record<string, Record<string, UseCaseSection[]>> = {
   },
 };
 
+Object.keys(USE_CASES).forEach(equipSlug => {
+  CITIES.forEach(city => {
+    if (city.status === 'active' && !USE_CASES[equipSlug][city.slug]) {
+      USE_CASES[equipSlug][city.slug] = USE_CASES[equipSlug].malaga.map(q => ({
+         title: q.title.replace(/Málaga/g, city.name),
+         body: q.body.replace(/Málaga/g, city.name)
+      }));
+    }
+  });
+});
+
 export const PRICE_TABLE_INTROS: Record<string, Record<string, string>> = {
   miniexcavadora: {
     malaga: 'El precio de alquiler de una miniexcavadora en Málaga depende fundamentalmente del tonelaje del modelo y la duración del alquiler. Los modelos más compactos (1–2 toneladas) son ideales para reformas y jardines, mientras que los de mayor tonelaje (4–6T) se solicitan para excavaciones de cimentación y obra civil. Los precios que te mostramos son orientativos e incluyen IVA. El coste final puede variar según disponibilidad, temporada y transporte a tu obra en la provincia de Málaga.',
   },
 };
+
+Object.keys(PRICE_TABLE_INTROS).forEach(equipSlug => {
+  CITIES.forEach(city => {
+    if (city.status === 'active' && !PRICE_TABLE_INTROS[equipSlug][city.slug]) {
+      PRICE_TABLE_INTROS[equipSlug][city.slug] = PRICE_TABLE_INTROS[equipSlug].malaga.replace(/Málaga/g, city.name);
+    }
+  });
+});
 
 // --- SUPPLIER PAGE DATA ---
 
@@ -267,6 +299,15 @@ export const CITY_FAQ: Record<string, FAQItem[]> = {
     },
   ],
 };
+
+CITIES.forEach(city => {
+  if (city.status === 'active' && !CITY_FAQ[city.slug]) {
+    CITY_FAQ[city.slug] = CITY_FAQ.malaga.map(q => ({
+      question: q.question.replace(/Málaga/g, city.name),
+      answer: q.answer.replace(/Málaga/g, city.name)
+    }));
+  }
+});
 
 export const CITY_PRICING_GUIDE: Record<string, { intro: string; marketContext: string }> = {
   malaga: {

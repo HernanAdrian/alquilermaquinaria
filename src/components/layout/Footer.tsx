@@ -34,7 +34,7 @@ export default function Footer() {
             <ul className="space-y-2">
               {EQUIPMENT_CATEGORIES.slice(0, 6).map((cat) => (
                 <li key={cat.id}>
-                  <Link href={`/alquiler/${cat.slug}/malaga/`} className="text-white/50 text-sm hover:text-white hover:text-primary transition-colors">
+                  <Link href={`/precios/${cat.slug}/`} className="text-white/50 text-sm hover:text-white hover:text-primary transition-colors">
                     {cat.name}
                   </Link>
                 </li>
@@ -48,9 +48,15 @@ export default function Footer() {
             <ul className="space-y-2">
               {CITIES.map((city) => (
                 <li key={city.id}>
-                  <Link href={city.status === 'active' ? `/ciudades/${city.slug}/` : '#'} className="text-white/50 text-sm hover:text-white hover:text-primary transition-colors">
-                    {city.name} {city.status === 'coming' && <span className="text-white/30">· Pronto</span>}
-                  </Link>
+                  {city.status === 'active' ? (
+                    <Link href={`/ciudades/${city.slug}/`} className="text-white/50 text-sm hover:text-white hover:text-primary transition-colors">
+                      {city.name}
+                    </Link>
+                  ) : (
+                    <span className="text-white/50 text-sm">
+                      {city.name} <span className="text-white/30">· Pronto</span>
+                    </span>
+                  )}
                 </li>
               ))}
             </ul>
@@ -60,10 +66,17 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">Empresa</h4>
             <ul className="space-y-2">
-              {['Sobre nosotros', 'Blog', 'Soy proveedor', 'Contacto', 'Aviso legal', 'Política de privacidad'].map((label) => (
-                <li key={label}>
-                  <Link href="#" className="text-white/50 text-sm hover:text-white hover:text-primary transition-colors">
-                    {label}
+              {[
+                { label: 'Sobre nosotros', href: '/' },
+                { label: 'Blog', href: '/blog/' },
+                { label: 'Soy proveedor', href: '/proveedores/' },
+                { label: 'Contacto', href: '/' },
+                { label: 'Aviso legal', href: '/' },
+                { label: 'Política de privacidad', href: '/' }
+              ].map((link) => (
+                <li key={link.label}>
+                  <Link href={link.href} className="text-white/50 text-sm hover:text-white hover:text-primary transition-colors">
+                    {link.label}
                   </Link>
                 </li>
               ))}
